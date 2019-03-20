@@ -23,12 +23,11 @@ This implementation can be extended to support other combinatorial optimization 
 ## Dependencies
 
 * Python=3.6 (should be OK with v >= 3.4)
-* PyTorch=0.2 and 0.3
+* PyTorch 0.4 (will update to a newer version when I get time)
 * tqdm
 * matplotlib
 * [tensorboard_logger](https://github.com/TeamHG-Memex/tensorboard_logger)
 
-PyTorch 0.4 compatibility is available on branch `pytorch-0.4`.
 
 ## TSP Results
 
