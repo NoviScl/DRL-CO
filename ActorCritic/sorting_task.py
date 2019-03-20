@@ -94,7 +94,7 @@ def create_dataset(
         line = ''
         for j in range(data_len-1):
             line += '{} '.format(tensor[j])
-        line += str(tensor[-1]) + '\n'
+        line += '{}'.format(tensor[j]) + '\n'
         return line
     
     print('Creating training data set for {}...'.format(train_task))

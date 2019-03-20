@@ -250,7 +250,7 @@ class Decoder(nn.Module):
         """
         batch_size = probs.size(0)
         # idxs is [batch_size]
-        idxs = probs.multinomial().squeeze(1)
+        idxs = probs.multinomial(1).squeeze(1)
 
         # due to race conditions, might need to resample here
         for old_idxs in selections:
@@ -292,7 +292,7 @@ class Decoder(nn.Module):
         elif all_idxs.dim() == 3:
             idxs = all_idxs[:, -1, :]
         else:
-            if all_idxs.size(0) > 1:
+            if all_idxs.dim() == 1:
                 idxs = all_idxs[-1]
             else:
                 idxs = all_idxs
@@ -305,6 +305,8 @@ class Decoder(nn.Module):
                     [x for x in range(batch_size)], :]
         else:
             x = embedded_inputs[idxs.data, [x for x in range(batch_size)], :]
+        if idxs.dim() == 0:
+            return x.view(1 * n_best, embedded_inputs.size(2)), idxs, active
         return x.view(idxs.size(0) * n_best, embedded_inputs.size(2)), idxs, active
 
 class PointerNetwork(nn.Module):
